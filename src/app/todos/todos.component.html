@@ -1,0 +1,13 @@
+
+<div class="container">
+    <div>
+        <input type="text" [(ngModel)]="newTaskTitle"/>
+        <button (click)="addTask()">+</button>
+        <button (click)="deleteTask()">-</button>
+    </div>
+</div>
+<div *ngIf="task.length > 0">
+    <ul>
+        <li *ngFor="let x of tasks; let index = index;">{{task.title}}</li>
+    </ul>
+</div>
