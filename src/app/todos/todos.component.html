@@ -1,13 +1,28 @@
 
-<div class="container">
-    <div>
-        <input type="text" [(ngModel)]="newTaskTitle"/>
-        <button (click)="addTask()">+</button>
-        <button (click)="deleteTask()">-</button>
-    </div>
+
+<div class="text-center mt-5">
+    <ng-container *ngIf="tasks; else elseTemplate">
+        <div *ngIf="tasks.length > 0; else elseNoTask">
+            <div *ngFor="let task of tasks; let i = index">
+                <div>
+                    - {{ task.title }}
+                    <button class="complete" (click)="completeTask(task, i)"> ✅
+                    </button>
+                </div>
+            </div>
+        </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p>Recupero Tasks...</p>
+        </ng-template>
 </div>
-<div *ngIf="task.length > 0">
-    <ul>
-        <li *ngFor="let x of tasks; let index = index;">{{task.title}}</li>
-    </ul>
+
+<div class="footer text-center">
+    <input type="text" [(ngModel)]="newTaskTitle">
+    <button (click)="addTask()">+</button>
 </div>
+
+<ng-template #elseNoTask>
+    <p>Ops, non ci sono Task</p>
+</ng-template>
+

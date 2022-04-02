@@ -1,27 +1,47 @@
-import { Injectable } from '@angular/core';
 import { Todo } from './modules/todo';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class TodosService {
-    public tasks: Todo[] = [];
+let todos: Todo [] = [];
 
-    public newTaskTitle:string = '';
+export function get(): Promise<Todo[]> {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res(todos);
+        },2000);
 
-    constructor(newTaskTitle:string ) {
-        this.newTaskTitle = this.newTaskTitle
+    });
+}
 
-    }
+export function add(todo: Omit<Todo, 'id'>): Promise<Todo> {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            const newTodo: Todo = {...todo, id: todos.length + 1 };
+            todos.push(newTodo)
+            res(newTodo);
+         }, 2000);
+    });
+}
 
-    public addTask(newTaskTitle:string) {
-            this.tasks.push(this.newTaskTitle);
-            this.newTaskTitle = '';
-        }
+export function remove(todo: Todo): Promise<number> {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            todos = todos.filter((todo) => todo.id !== todo.id);
+            res(todo.id);
+        }, 2000);
+    })
+}
 
-
-    public deleteTask(index:any) {
-        this.tasks.splice(index, 1);
-    }
+export function update(newTodo: Partial<Todo>, id: number): Promise<Todo> {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            todos = todos.map((todo) =>
+            todo.id == id ? { ...todo, ...newTodo } : todo);
+            const updatedTodo = todos.find((todo) => todo.id == id);
+            if (updatedTodo) {
+                res(updatedTodo);
+            } else {
+                rej('todo non trovato');
+            }
+        }, 2000);
+    });
 }
 

@@ -26,8 +26,8 @@ const routes: Route[] = [
 @NgModule({
   declarations: [
     AppComponent,
-    TodosComponent,
     CompletatiComponent,
+    TodosComponent,
     NavbarComponent
   ],
   imports: [

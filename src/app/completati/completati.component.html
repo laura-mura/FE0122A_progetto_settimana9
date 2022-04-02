@@ -1,1 +1,16 @@
-<p>completati works!</p>
+<div class="text-center mt-5">
+    <ng-container *ngIf="tasks; else elseTemplate">
+        <div *ngIf="tasks.length > 0; else elseNoTask">
+            <div *ngFor="let task of tasks; let i = index">
+                <div>
+                    - {{ task.title }}
+                </div>
+            </div>
+        </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p>Recupero Tasks...</p>
+        </ng-template>
+</div>
+
+<ng-template class="text-center" #elseNoTask>Non ci sono task completati</ng-template>
